@@ -17,6 +17,17 @@ sudo apt update
 sudo apt install -y build-essential dkms linux-headers-$(uname -r)
 ```
 
+Na CachyOS zainstaluj DKMS, Clang, narzędzia kompilacji i nagłówki dokładnie
+odpowiadające używanemu wariantowi kernela. Dla standardowego kernela CachyOS:
+
+```bash
+sudo pacman -S --needed base-devel dkms clang linux-cachyos-headers
+```
+
+Dla kernela LTS użyj `linux-cachyos-lts-headers`; dla innego wariantu wybierz
+odpowiadający mu pakiet `*-headers`. Sterownik jest budowany przez Clang, bo
+kernel CachyOS może używać opcji kompilatora nieobsługiwanych przez GCC.
+
 ## Instalacja
 
 1. Pobierz repozytorium:
@@ -45,6 +56,10 @@ Skrypt wykonuje kolejno:
 - `dkms add`, `dkms build` i `dkms install`
 - `depmod -a`
 - sprawdzenie obecności identyfikatora `2c4e:0124`
+
+Uwaga: test identyfikatora w `modinfo` potwierdza obecność aliasu urządzenia,
+ale nie potwierdza, że moduł został załadowany ani że adapter działa. Jeśli
+Secure Boot jest włączony, kernel może wymagać podpisania modułów DKMS.
 
 4. Po zakończeniu zrestartuj komputer lub odłącz i podłącz ponownie adapter USB. W razie potrzeby uruchom ponownie system.
 

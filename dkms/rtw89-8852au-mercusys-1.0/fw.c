@@ -8,6 +8,14 @@
 #include "coex.h"
 #include "debug.h"
 #include "fw.h"
+
+/* Keep building against kernel headers that predate the EMLSR value names. */
+#ifndef IEEE80211_EML_CAP_EMLSR_PADDING_DELAY_256US
+#define IEEE80211_EML_CAP_EMLSR_PADDING_DELAY_256US 4
+#endif
+#ifndef IEEE80211_EML_CAP_EMLSR_TRANSITION_DELAY_256US
+#define IEEE80211_EML_CAP_EMLSR_TRANSITION_DELAY_256US 5
+#endif
 #include "mac.h"
 #include "phy.h"
 #include "ps.h"
